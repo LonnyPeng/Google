@@ -61,6 +61,12 @@ class GoogleTranslate
 	            'q' => urlencode($tranInfo['text']),
 	        ),
 	    );
+	    
+	    $status = $this->curl($urlInfo, '', true);
+	    if ($status['http_code'] != 200) {
+	    	return "HTTP ERROR " . $status['http_code'];
+	    }
+
 	    $html = $this->curl($urlInfo);
 	    $data = json_decode($html);
 
@@ -183,7 +189,7 @@ class GoogleTranslate
 	    $html = $this->curl(array('url' => "http://translate.google.cn"));
 	    preg_match($preg['tkk'], $html, $arr);
 
-	    return $arr[3] . '.' . ($arr[1] + $arr[2]);
+	    return $arr[3] . '.' . (floatval($arr[1]) + floatval($arr[2]));
 	}
 
 	/**
