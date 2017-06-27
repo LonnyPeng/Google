@@ -62,9 +62,9 @@ class GoogleTranslate
 	        ),
 	    );
 	    
-	    $status = $this->curl($urlInfo, '', true);
-	    if ($status['http_code'] != 200) {
-	    	return "HTTP ERROR " . $status['http_code'];
+	    $urlStatus = $this->curl($urlInfo, '', true);
+	    if ($urlStatus['http_code'] != 200) {
+	    	return "HTTP ERROR " . $urlStatus['http_code'];
 	    }
 
 	    $html = $this->curl($urlInfo);
